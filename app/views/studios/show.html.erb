@@ -1,0 +1,59 @@
+</ul><h2 class="title is-2">Animes made by <%= @studios.name %></h2>
+
+<% if @studios.animes.any? %>
+  <div class="columns is-multiline">
+    <% @studios.animes.each do |anime| %>
+      <div class="column is-one-quarter">
+        <div class="image-container">
+          <%= image_tag anime.image_url, alt: anime.title, class: "anime-image" if anime.image_url.present? %>
+          <h3 class="anime-title has-text-centered">
+            <%= link_to anime.title, anime, class: "title-link" %>
+          </h3>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+<% else %>
+  <p>No animes found for this studio.</p>
+<% end %>
+
+<!-- CSS -->
+<style>
+  .image-container {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .anime-image {
+    width: auto;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+  }
+
+  .anime-image:hover {
+    transform: scale(1.05);
+  }
+
+  .anime-title {
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #D3D3D3;
+    transition: color 0.3s ease;
+  }
+
+  .title-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .title-link:hover {
+    color: #ff3860;
+  }
+
+
+</style>

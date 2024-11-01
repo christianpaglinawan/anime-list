@@ -1,0 +1,107 @@
+<div class="flex-container">
+  <h2 class="title is-2">Top 2024 Animes</h2>
+  <div class="pagination">
+    <%= paginate @animes %> <!-- Pagination links -->
+  </div>
+</div>
+
+<%= form_with url: animes_path, method: :get, local: true, class: "field has-addons mb-4 mt-2" %>
+  <div class="control is-expanded">
+    <input type="text" name="query" placeholder="Search for an anime..." class="input" value="<%= params[:query] %>">
+  </div>
+  <div class="control">
+    <button type="submit" class="button is-info">Search</button>
+  </div>
+</form>
+
+<div class="columns is-multiline">
+  <% @animes.each do |anime| %>
+    <div class="column is-one-quarter">
+      <div class="image-container">
+        <%= image_tag anime.image_url, alt: anime.title, class: "anime-image" if anime.image_url.present? %>
+        <h3 class="anime-title has-text-centered">
+          <%= link_to anime.title, anime, class: "title-link" %>
+        </h3>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="pagination">
+  <%= paginate @animes %> <!-- Pagination links -->
+</div>
+
+<!-- CSS -->
+
+<style>
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .title.is-2 {
+    margin-bottom: 0;
+  }
+
+  .image-container {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .anime-image {
+    width: auto;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+  }
+
+  .anime-image:hover {
+    transform: scale(1.05);
+  }
+
+  .anime-title {
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #D3D3D3;
+    transition: color 0.3s ease;
+  }
+
+  .title-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .title-link:hover {
+    color: #ff3860;
+  }
+
+  .pagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .pagination a {
+    border: none;
+    background: transparent;
+    color: #3273dc;
+    padding: 8px 12px;
+    font-weight: normal;
+    transition: color 0.3s;
+  }
+
+  .pagination a:hover {
+    color: #ff3860;
+    text-decoration: underline;
+  }
+
+  .pagination .current {
+    font-weight: bold;
+    color: #ff3860;
+    pointer-events: none;
+  }
+</style>
